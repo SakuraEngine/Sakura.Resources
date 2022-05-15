@@ -12,7 +12,7 @@
 
 > 一个跨平台, 完全模块化的现代游戏引擎.
 
-* 跨平台: 使用Windows/Linux进行开发并发布到Win/Linux/Android/IOS上
+* 跨平台: 使用 Windows/MacOSX 进行开发并发布到Win/MacOSX上
 * 模块化: 自由装载模块来配置您的功能组
   
 
