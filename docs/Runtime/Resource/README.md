@@ -23,7 +23,7 @@ Sakura Runtime 只对 Resource 进行装载，而完全隔离 Asset 和 RawResou
 3. 资源载入 - 从读取完成的内存中反序列化出资源具体数据，同时发起依赖资源的装载
 4. 资源安装 - 实例化依赖的引用，正式初始化资源，比如上载数据到显卡
 
-为了提高响应速度和性能，Sakura 中以上阶段全部进行了异步化处理，并为每个阶段准备了合理的异步手段：对于 IO 型任务，Sakura 提供了 [IO Service](https://media.githubusercontent.com/media/SakuraEngine/Sakura.Resources/main/docs/Runtime/IO/README.md)；而对于运算密集型任务，Sakura 提供了基于 Fiber 的 [TaskScheduler]()。
+为了提高响应速度和性能，Sakura 中以上阶段全部进行了异步化处理，并为每个阶段准备了合理的异步手段：对于 IO 型任务，Sakura 提供了 [IO Service](Runtime/IO/README.md)；而对于运算密集型任务，Sakura 提供了基于 Fiber 的 [TaskScheduler]()。
 
 同时游戏作为高动态的应用，资源的请求也是高动态的，会存在资源还没有加载完就不需要了的情况（玩家快速传送），通过切分阶段，Sakura 能够在每个阶段及时的进行 Cancel 响应，减少资源加载峰值并提高吞吐量。
 
