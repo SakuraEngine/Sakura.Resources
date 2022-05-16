@@ -118,7 +118,9 @@ select A,B from archetype where archetype.match(A, B);
 
 ## API 设计
 
-* 面向数据：在 **Dual** 中，我们遵循了面向数据的原则，弱化了对象的存在，而增强了数据的存在。具体来说，几乎所有 API 操作的目标都不是对象，而是数据：在 **Dual** 中为 `dual_chunk_view_t`，遍历时产生 `dual_chunk_view_t`，处理 entity 时产生 `dual_chunk_view_t`，生成 entity 时产生 `dual_chunk_view_t` 等等。
+Dual 拥有独特的 API 设计思路：
+
+* 面向数据：在 **Dual** 中，我们遵循了面向数据的原则，弱化了对象的存在，而增强了数据的存在。具体来说，几乎所有 API 操作的目标都不是对象，而是数据：在 **Dual** 中数据被定义为 `dual_chunk_view_t`（也就是 Archetype 的一个切片），遍历时通过 `dual_chunk_view_t` 遍历，处理 entity 时通过 `dual_chunk_view_t` 进行操作，生成 entity 时直接返回 `dual_chunk_view_t` 等等。
 * 批量化：在面向数据设计的基础上，**Dual** 尽量进行了批量化处理，比如在处理 entity 列表时，会先尝试将其合批为 `dual_chunk_view_t` 再进行具体的操作，在操作类型的时候（增删组件），尽量只进行一步操作：`Add(A,B)`　而不是 `Add(A), Add(B)`
 * DSL: 在 Query 的创建上提供了一个极简的 DSL 用于简化代码。
 
@@ -130,7 +132,7 @@ select A,B from archetype where archetype.match(A, B);
 
 #### 原理
 
-Query 是 ECS 中的一个对象，其作用如下：
+Query 作用如下：
 
 1. 缓存查询到的组，避免反复查询（基于查询变动的次数远小于查询的次数这个假设）
 2. 记录代码访问的组件，为并行做准备
