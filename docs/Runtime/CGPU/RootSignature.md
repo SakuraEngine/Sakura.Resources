@@ -15,7 +15,7 @@ CGPU 的 RootSignature 创建非常自动化，只需要传入以下数据:
 大量的工作在后端完成，以确保在统一的前端概念下最优化的实现。后端会处理如下任务以创建出真实的后端结构：
 
 - 通过 shader 反射来自动获取到着色器参数表；
-- 合并不同 pipeline shader 的参数表，以自动创建出最优visiblity的绑定表；
+- 合并不同 pipeline shader 的参数表，以自动创建出最优 visibility 的绑定表；
 - 反射出的绑定表会被存储到 RootSignature 对象头中，帮助上层应用程序以可编程的方式实现自动化且高效的 DescriptorSet 创建以及参数更新。
 
 得益于完全自动的反射流程，CGPU 可以轻松地在不同的平台变换参数绑定表的布局并使用名字更新它们，而 Host 程序完全无需为 shader 程序的参数表变化做出任何的应对。比如我们可以在 shader 中这样写：
@@ -108,6 +108,9 @@ cgpu_free_root_signature_pool(pool);
 
 只需要在创建 RootSignature 时传入 Pool，即可自动完成上述复用。CGPU 会扫描 Pool 中 RootSignature 的特征并尝试匹配已存的合适根签名，当匹配失败时才会创建新的 RootSignature。
 
+此外，在使用 pool 创建 RootSignature 时，create/free_root_signature 会切换成RC模式。每次被复用，都会为原始的 RootSignature 添加 RC 计数。在 RC 计数为 0 时，后端的 API 资源会被真正销毁。
+
+使用 pool 复用 RootSignature 不仅能减少 GPU 上的切换，更能在 CPU 端减少序列化以及销毁 RST 的时间。但是永远不要忘记调用 free_root_signature，否则会产生 RST 对象泄露。
 
 # TODO：绑定表合并提醒
 
