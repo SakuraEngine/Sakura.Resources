@@ -9,6 +9,7 @@
 * Resource - 烘焙过后的资源数据，是 RawResource 经过平台相关的处理和优化之后最终的数据格式，举例来说：IR编译为汇编并进行优化，图片压缩为 DXT 之类的显卡压缩格式都属于 Resource
 
 Sakura Runtime 只对 Resource 进行装载，而完全隔离 Asset 和 RawResource 的细节，这意味着 Sakura Runtime 直接在目标环境中运行，尽量去除开发版和发布版的差别。
+>[ResourceService](Devtool/ResourceService/README.md)
 
 ## 资源装载
 
