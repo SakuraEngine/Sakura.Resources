@@ -108,7 +108,7 @@ cgpu_free_root_signature_pool(pool);
 
 只需要在创建 RootSignature 时传入 Pool，即可自动完成上述复用。CGPU 会扫描 Pool 中 RootSignature 的特征并尝试匹配已存的合适根签名，当匹配失败时才会创建新的 RootSignature。
 
-此外，在使用 pool 创建 RootSignature 时，create/free_root_signature 会切换成RC模式。每次被复用，都会为原始的 RootSignature 添加 RC 计数。在 RC 计数为 0 时，后端的 API 资源会被真正销毁。
+此外，在使用 pool 创建 RootSignature 时，create/free_root_signature 会切换成 RC 模式。每次被复用，都会为原始的 RootSignature 添加 RC 计数。在 RC 计数为 0 时，后端的 API 资源会被真正销毁。
 
 使用 pool 复用 RootSignature 不仅能减少 GPU 上的切换，更能在 CPU 端减少序列化以及销毁 RST 的时间。但是永远不要忘记调用 free_root_signature，否则会产生 RST 对象泄露。
 
