@@ -33,16 +33,16 @@ SamplerState texture_sampler : register(s0, space1);
 而在 Host 程序中如此更新它们:
 
 ``` cpp
-    // 以静态采样器模式绑定
-    root_sig_desc.static_samplers = {"texture_sampler"};
-    auto root_sig = cgpu_create_root_signature(device, &root_sig_desc);
-    // ...
-    // 在 descriptor set 上更新纹理
-    CGPUDescriptorData arguments[1];
-    arguments[0].name = "sampled_texture";
-    arguments[0].count = 1;
-    arguments[0].textures = &texture;
-    cgpu_update_descriptor_set(desc_set, arguments, 1);
+// 以静态采样器模式绑定
+root_sig_desc.static_samplers = {"texture_sampler"};
+auto root_sig = cgpu_create_root_signature(device, &root_sig_desc);
+// ...
+// 在 descriptor set 上更新纹理
+CGPUDescriptorData arguments[1];
+arguments[0].name = "sampled_texture";
+arguments[0].count = 1;
+arguments[0].textures = &texture;
+cgpu_update_descriptor_set(desc_set, arguments, 1);
 ```
 
 这将 descriptor set 的布局完全交给了 shader 的编写者，而无需在 Host 程序上做出任何修改。
