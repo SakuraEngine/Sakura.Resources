@@ -6,7 +6,7 @@
  * @Description: In User Settings Edit
  * @FilePath: \undefinedd:\SakuraDocument\_coverpage.md
  -->
-![logo](https://file.moetu.org/images/2020/03/03/Sakura-Iconb56a2209e558d5bb.md.png)
+![logo](https://media.githubusercontent.com/media/SakuraEngine/Sakura.Resources/main/logos/skr_icon.svg)
 
 # Sakura Engine
 
