@@ -1,0 +1,27 @@
+name: bulid manifest
+
+on:
+  workflow_dispatch:
+  release:
+    types: [edited]
+
+jobs:
+  update-manifest:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+      
+      - name: Download releases
+        uses: robinraju/release-downloader@v1.10
+        with:
+          repository: ${{ github.repository }}
+          releaseId: "SDKs"
+          fileName: "*"
+          out-file-path: "download_releases"
+
+      - name: Display release files
+        run: |
+          cd download_releases
+          ls -l
+          cd ..
