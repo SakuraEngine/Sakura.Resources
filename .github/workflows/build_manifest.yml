@@ -2,7 +2,7 @@ name: bulid manifest
 
 on:
   release:
-    types: [edited]
+    types: [edited, released]
   workflow_dispatch:
 
 jobs:
