@@ -35,3 +35,47 @@ jobs:
         run: |
           cd download_releases
           xmake l "../release_tools/build_manifest.lua" "*" "manifest.json"
+          echo "MANIFEST_SHA=`xmake l "../../scripts/get_sha.lua" manifest.json`" >> $GITHUB_ENV
+          cd ..
+      
+      - name: Delete old manifest
+        uses: mknejp/delete-release-assets@v1
+        with:
+          token: ${{ github.token }}
+          tag: SDKs
+          repository: ${{ github.repository }}
+          assets: manifest.json
+
+      # - name: Get upload URL
+      #   id: get_release
+      #   uses: bruceadams/get-release@v1.3.2
+      #   env:
+      #     GITHUB_TOKEN: ${{ github.token }}
+      #   with:
+      #     tag_name: SDKs
+
+      - name: Update release
+        id: update_release
+        uses: joutvhu/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: SDKs
+          name: SDKs
+          draft: false
+          prerelease: false
+          on_release_exists: update
+          remove_assets: false
+          body: |
+            SDK files
+            manifest sha256 is "${{ env.MANIFEST_SHA }}"
+
+      - name: Upload manifest
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.update_release.outputs.upload_url }}
+          asset_path: download_releases/manifest.json
+          asset_name: manifest.json
+          asset_content_type: application/json
