@@ -7,7 +7,7 @@ function main(package_path, manifest_path)
     for _, package in ipairs(packages) do
         package_name = path.filename(package)
         
-        if package_name != path.filename(manifest_path) then
+        if package_name ~= path.filename(manifest_path) then
             package_sha = hash.sha256(package)
             printf("package: %s, sha256: %s\n", package_name, package_sha)
             manifest[package_name] = package_sha
