@@ -16,7 +16,7 @@ jobs:
         uses: robinraju/release-downloader@v1.10
         with:
           repository: ${{ github.repository }}
-          tag: "SKDs"
+          tag: "SDKs"
           fileName: "*"
           out-file-path: "download_releases"
 
