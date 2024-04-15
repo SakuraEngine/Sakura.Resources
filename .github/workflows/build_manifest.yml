@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install xmake
-        uses: xmake-io/github-action-setup-xmake@v1
+        uses: xmake-io/github-action-setup-xmake@v1.2.2
         with:
           xmake-version: latest
           actions-cache-folder: '.xmake-cache'
