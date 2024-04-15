@@ -9,16 +9,11 @@ jobs:
   update-manifest:
     runs-on: ubuntu-latest
     steps:
-      - name: Get current date as package key
-        id: cache_key
-        run: echo "key=$(date +'%W')" >> $GITHUB_OUTPUT
-        shell: bash
-
       - name: Install xmake
         uses: xmake-io/github-action-setup-xmake@v1
         with:
           xmake-version: latest
-          actions-cache-folder: .xmake-cache-W${{ steps.cache_key.outputs.key }}
+          actions-cache-folder: '.xmake-cache'
 
       - name: Checkout code
         uses: actions/checkout@v2
