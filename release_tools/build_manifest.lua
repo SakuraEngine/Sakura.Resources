@@ -22,7 +22,9 @@ function main(package_path, manifest_path)
 
             old_package_sha = old_manifest[package_name]
 
-            if old_package_sha and old_package_sha ~= package_sha then
+            if not old_package_sha then
+                printf("[NEW] package: %s\n\tsha256: %s\n", package_name, package_sha)
+            elseif old_package_sha and old_package_sha ~= package_sha then
                 printf("[CHANGED] package: %s\n\tsha256: %s\n\told_sha256: %s\n", package_name, package_sha, old_package_sha)
             else
                 printf("[KEEP] package: %s\n\tsha256: %s\n", package_name, package_sha)

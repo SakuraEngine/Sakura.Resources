@@ -72,10 +72,12 @@ jobs:
           body: |
             SDK files
             manifest sha256 is "${{ env.MANIFEST_SHA }}"
+
             WARNING: the manifest sha256 is not stable, it will change every ci run, even if the release files are not changed.
-            WARNING: manifest sha256 不稳定，每次 ci 运行都会变化，即使 release 文件没有变化
+            警告: manifest sha256 不稳定，每次 ci 运行都会变化，即使 release 文件没有变化
+            
             NOTE: after the release is updated, please manually trigger action "build manifest" to update the manifest file
-            NOTE: 上传文件之后，请手动触发 "build manifest" action 来更新 manifest 文件
+            注意: 上传文件之后，请手动触发 "build manifest" action 来更新 manifest 文件
 
       - name: Upload manifest
         uses: actions/upload-release-asset@v1
