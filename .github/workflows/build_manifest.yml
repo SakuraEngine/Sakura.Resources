@@ -9,9 +9,14 @@ jobs:
   update-manifest:
     runs-on: ubuntu-latest
     steps:
+      - name: Install xmake
+        uses: xmake-io/github-action-setup-xmake@v1
+        with:
+          xmake-version: latest
+
       - name: Checkout code
         uses: actions/checkout@v2
-      
+
       - name: Download releases
         uses: robinraju/release-downloader@v1.10
         with:
@@ -23,9 +28,9 @@ jobs:
       - name: Display release files
         run: |
           cd download_releases
-          ls -l
+          ls -R
           cd ..
-      
+
       - name: Generate manifest
         run: |
           cd download_releases
