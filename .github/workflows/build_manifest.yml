@@ -1,9 +1,9 @@
 name: bulid manifest
 
 on:
-  workflow_dispatch:
   release:
     types: [edited]
+  workflow_dispatch:
 
 jobs:
   update-manifest:
