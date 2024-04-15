@@ -10,11 +10,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Install xmake
-        uses: xmake-io/github-action-setup-xmake@v1.2.2
+        uses: xmake-io/github-action-setup-xmake@v1
         with:
           xmake-version: latest
-          actions-cache-folder: '.xmake-cache'
-          actions-cache-key: 'build_manifest'
+          # actions-cache-folder: '.xmake-cache'
+          # actions-cache-key: 'build_manifest'
 
       - name: Checkout code
         uses: actions/checkout@v4
