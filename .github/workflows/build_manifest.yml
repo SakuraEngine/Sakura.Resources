@@ -35,7 +35,7 @@ jobs:
         run: |
           cd download_releases
           xmake l "../release_tools/build_manifest.lua" "*" "manifest.json"
-          echo "MANIFEST_SHA=`xmake l "../../scripts/get_sha.lua" manifest.json`" >> $GITHUB_ENV
+          echo "MANIFEST_SHA=`xmake l "../release_tools/get_sha.lua" manifest.json`" >> $GITHUB_ENV
           cd ..
       
       - name: Delete old manifest
